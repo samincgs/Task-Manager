@@ -3,6 +3,7 @@ import { Outfit } from 'next/font/google';
 import './globals.css';
 import { cn } from '@/lib/utils';
 import Sidebar from '@/components/Sidebar';
+import { ClerkProvider } from '@clerk/nextjs';
 
 const font = Outfit({ subsets: ['latin'] });
 
@@ -17,11 +18,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang='en'>
-      <body className={cn('bg-[#0b0b0b]', font.className)}>
-        <Sidebar />
-        {children}
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang='en'>
+        <body className={cn('bg-[#0b0b0b]', font.className)}>{children}</body>
+      </html>
+    </ClerkProvider>
   );
 }
